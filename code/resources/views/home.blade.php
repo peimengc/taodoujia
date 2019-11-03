@@ -45,8 +45,7 @@
                     <table class="table table-hover table-data">
                         <thead>
                         <tr>
-                            <th>选中</th>
-                            <th>编号</th>
+                            <th>#</th>
                             <th>商品</th>
                             <th>状态</th>
                             <th>价格</th>
@@ -56,19 +55,23 @@
                         </thead>
                         <tbody>
                         <tr>
+                            <td>123</td>
                             <td>
-                                <div class="checkbox">
-                                    <label>
-                                        <input type="checkbox" value="">
-                                    </label>
+                                <div class="thum-box">
+                                    <img src="https://p9-dy.byteimg.com/aweme/720x720/2deb40007833c5b3a6615.jpeg"
+                                         alt="">
+                                    <div class="ml-1 d-inline-block align-middle">
+                                        <div>
+                                            <a class="font10" href="">开大宝</a>
+                                            <div class="font08 c-dgray">11111</div>
+                                        </div>
+                                    </div>
                                 </div>
                             </td>
                             <td>11111111111</td>
                             <td>11111111111</td>
                             <td>11111111111</td>
-                            <td>11111111111</td>
-                            <td>11111111111</td>
-                            <td>11111111111</td>
+                            <td></td>
                         </tr>
                         </tbody>
                     </table>

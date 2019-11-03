@@ -24,13 +24,29 @@
             color: #b3b3b3;
         }
 
-        .font1 {
+        .font08 {
             font-size: 0.8rem;
+        }
+
+        .font10 {
+            font-size: 1rem;
+        }
+
+        .font15 {
+            font-size: 1.5rem;
         }
 
         .table-data tbody tr td {
             color: #333333;
             vertical-align: middle;
+            word-break: keep-all;
+            white-space:nowrap;
+        }
+
+        .thum-box img {
+            height: 3.5rem;
+            width: 3.5rem;
+            border-radius: 5px;
         }
     </style>
 </head>

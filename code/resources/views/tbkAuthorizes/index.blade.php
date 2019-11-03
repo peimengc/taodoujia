@@ -6,7 +6,7 @@
             <div class="col-md-12">
                 <div class="border-bottom">
                     <div class="float-right">
-                        <a class="btn btn-primary" href="{{ route('tbkAuthorizes.create') }}" >新增授权</a>
+                        <a class="btn btn-primary" href="{{ route('tbkAuthorizes.create') }}">新增授权</a>
                     </div>
                     <h4>联盟授权</h4>
                     <span>联盟授权</span>
@@ -17,7 +17,7 @@
                     <table class="table table-hover table-data">
                         <thead>
                         <tr>
-                            <th>编号</th>
+                            <th>#</th>
                             <th>昵称/ID</th>
                             <th>到期时间</th>
                             <th>操作</th>
@@ -28,10 +28,8 @@
                             <tr>
                                 <td>{{ $authorize->id }}</td>
                                 <td>
-                                    <div class="d-inline-block">
-                                        {{ $authorize->tb_user_nick }}
-                                        <div class="font1 c-dgray">{{ $authorize->tb_user_id }}</div>
-                                    </div>
+                                    {{ $authorize->tb_user_nick }}
+                                    <div class="font08 c-dgray">{{ $authorize->tb_user_id }}</div>
                                 </td>
                                 <td>{{ $authorize->expire_time }}</td>
                                 <td>

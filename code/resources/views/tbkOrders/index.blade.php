@@ -42,31 +42,37 @@
                     <table class="table table-hover table-data">
                         <thead>
                         <tr>
-                            <th>选中</th>
-                            <th>编号</th>
+                            <th>#</th>
                             <th>商品</th>
                             <th>状态</th>
                             <th>价格</th>
-                            <th>佣金</th>
+                            <th>预估 / 结算</th>
                             <th>操作</th>
                         </tr>
                         </thead>
                         <tbody>
                         @foreach($tbkOrders as $order)
                             <tr>
+                                <td>{{ $order->id }}</td>
                                 <td>
-                                    <div class="checkbox">
-                                        <label>
-                                            <input type="checkbox" value="">
-                                        </label>
+                                    <div class="thum-box">
+                                        <img src="{{ $order->item_img }}"
+                                             alt="商品图片">
+                                        <div class="ml-1 d-inline-block align-middle">
+                                            <div>
+                                                <a class="font10"
+                                                   href="{{ $order->item_link }}">{{ $order->item_title }}</a>
+                                                <div class="font08 c-dgray">付款时间：{{ $order->tk_paid_time }}</div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </td>
-                                <td>11111111111</td>
-                                <td>11111111111</td>
-                                <td>11111111111</td>
-                                <td>11111111111</td>
-                                <td>11111111111</td>
-                                <td>11111111111</td>
+                                <td>{{ $order->tk_status }}</td>
+                                <td>{{ $order->item_price }} / {{ $order->alipay_total_price }}</td>
+                                <td>{{ $order->pub_share_pre_fee }} / {{ $order->total_commission_fee }}</td>
+                                <td>
+
+                                </td>
                             </tr>
                         @endforeach
                         </tbody>
