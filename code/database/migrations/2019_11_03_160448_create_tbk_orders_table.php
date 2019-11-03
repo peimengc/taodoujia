@@ -20,7 +20,7 @@ class CreateTbkOrdersTable extends Migration
             $table->tinyInteger('tk_status')->index()->nullable()->comment('订单状态');
 
             $table->unsignedBigInteger('account_id')->nullable()->index()->comment('账号ID');
-            $table->unsignedBigInteger('authorize')->index()->comment('授权ID');
+            $table->unsignedBigInteger('authorize_id')->index()->comment('授权ID');
 
             $table->bigInteger('adzone_id')->index()->comment('广告位ID');
 
