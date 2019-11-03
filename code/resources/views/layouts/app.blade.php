@@ -37,7 +37,7 @@
                 <ul class="navbar-nav mr-auto">
                     @auth
                         <li class="nav-item dropdown">
-                            <a class="nav-link" href="{{ route('home') }}">联盟订单</a>
+                            <a class="nav-link" href="{{ route('tbkOrders.index') }}">联盟订单</a>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link" href="{{ route('home2') }}">DOU+统计</a>
