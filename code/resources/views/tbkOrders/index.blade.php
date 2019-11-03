@@ -5,8 +5,8 @@
         <div class="row justify-content-center">
             <div class="col-md-12">
                 <div class="border-bottom">
-                    <h4>所有订单</h4>
-                    <span>联盟订单 / 所有订单</span>
+                    <h4>联盟订单</h4>
+                    <span>联盟订单</span>
                 </div>
             </div>
             <div class="col-md-12 my-3">
@@ -39,7 +39,7 @@
             </div>
             <div class="col-md-12">
                 <div class="table-responsive">
-                    <table class="table table-hover">
+                    <table class="table table-hover table-data">
                         <thead>
                         <tr>
                             <th>选中</th>

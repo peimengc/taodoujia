@@ -18,6 +18,21 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+    <style>
+        .c-dgray {
+            color: #b3b3b3;
+        }
+
+        .font1 {
+            font-size: 0.8rem;
+        }
+
+        .table-data tbody tr td {
+            color: #333333;
+            vertical-align: middle;
+        }
+    </style>
 </head>
 <body>
 <div id="app">
@@ -37,7 +52,19 @@
                 <ul class="navbar-nav mr-auto">
                     @auth
                         <li class="nav-item dropdown">
-                            <a class="nav-link" href="{{ route('tbkOrders.index') }}">联盟订单</a>
+                            <a id="taobaoDropdown" class="nav-link dropdown-toggle" href="#" role="button"
+                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                淘宝联盟 <span class="caret"></span>
+                            </a>
+
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="taobaoDropdown">
+                                <a class="dropdown-item" href="{{ route('tbkAuthorizes.index') }}">
+                                    联盟授权
+                                </a>
+                                <a class="dropdown-item" href="{{ route('tbkOrders.index') }}">
+                                    联盟订单
+                                </a>
+                            </div>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link" href="{{ route('home2') }}">DOU+统计</a>

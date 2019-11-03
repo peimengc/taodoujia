@@ -42,7 +42,7 @@
             </div>
             <div class="col-md-12">
                 <div class="table-responsive">
-                    <table class="table table-hover">
+                    <table class="table table-hover table-data">
                         <thead>
                         <tr>
                             <th>选中</th>

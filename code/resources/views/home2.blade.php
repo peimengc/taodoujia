@@ -10,7 +10,7 @@
                 </div>
             </div>
             <div class="col-md-8">
-                <form class="mt-5">
+                <form class="mt-4">
                     <div class="form-group">
                         <label for="authorize">Authorize JSON：</label>
                         <textarea class="form-control" name="authorize" id="authorize" cols="30" rows="5"></textarea>
