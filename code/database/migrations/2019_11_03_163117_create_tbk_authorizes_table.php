@@ -18,7 +18,7 @@ class CreateTbkAuthorizesTable extends Migration
             $table->boolean('active')->default(true)->comment('是否启用');
             $table->string('tb_user_id')->nullable()->unique()->comment('授权账号id');
             $table->string('tb_user_nick')->nullable()->index()->comment('授权账号名称');
-            $table->string('access_token')->nullable();
+            $table->string('access_token')->unique()->nullable();
             $table->timestamp('expire_time')->nullable()->comment('失效时间');
             $table->json('auth_json')->nullable()->comment('auth_json');
             $table->timestamps();

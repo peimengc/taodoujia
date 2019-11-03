@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Arr;
 
 class TbkOrder extends Model
 {
@@ -66,4 +67,25 @@ class TbkOrder extends Model
         self::ORDER_CLOSE_STATUS => '订单失效',
         self::ORDER_SUC_STATUS => '订单成功',
     ];
+
+    public static function saveByApi(array $data, $token)
+    {
+        if (empty($data)) {
+            return;
+        }
+        //获取授权id,关联
+        $tbkAuthorizeId = TbkAuthorize::query()->where('access_token',$token)->value('id');
+        //集合
+        $colData = collect($data);
+        //获取所有tradeId
+        $allTradeIdArr = $colData->pluck('tarde_id')->all();
+        //查询已存在的
+        $existTradeIdArr = static::query()->whereIn('trade_id', $allTradeIdArr)->pluck('trade_id')->all();
+        //集合过滤掉已存在的
+        $colData = $colData->filter(function ($item) use ($existTradeIdArr) {
+            return !in_array(Arr::get($item, 'tarde_id'), $existTradeIdArr);
+        })->all();
+        //批量写入
+        static::query()->insert($colData);
+    }
 }

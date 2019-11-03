@@ -21,6 +21,14 @@ Auth::routes(['register' => false]);
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/home2', 'HomeController@index2')->name('home2');
 
+Route::get('/test',function () {
+    $orderHelper = new \App\Helpers\Tbk\TbkOrderHelper();
+    $tbkAuth = \App\Models\TbkAuthorize::query()->first();
+    if ($tbkAuth){
+       $orderHelper->getNewOrder($tbkAuth->access_token);
+    }
+});
+
 Route::group([
     'middleware' => 'auth'
 ], function () {
