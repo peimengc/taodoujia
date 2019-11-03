@@ -24,6 +24,10 @@
             color: #b3b3b3;
         }
 
+        .c-blue {
+            color: #3490dc;
+        }
+
         .font08 {
             font-size: 0.8rem;
         }

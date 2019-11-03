@@ -6,7 +6,7 @@
             <div class="col-md-12">
                 <div class="border-bottom">
                     <h4>联盟订单</h4>
-                    <span>联盟订单</span>
+                    <span>联盟订单 <u class="c-blue">{{ $tbkOrders->total() }}</u></span>
                 </div>
             </div>
             <div class="col-md-12 my-3">
@@ -14,24 +14,27 @@
                     <div class="row">
                         <div class="col-md-2">
                             <div class="form-group">
-                                <label class="sr-only" for="exampleInputEmail3">Email address</label>
-                                <input type="email" class="form-control" id="exampleInputEmail3" placeholder="Email">
+                                <label class="sr-only" for="item_title">商品编号/名称</label>
+                                <input type="text" class="form-control" name="item_title" id="item_title"
+                                       placeholder="商品编号/名称" value="{{ request('item_title') }}">
                             </div>
                         </div>
                         <div class="col-md-2">
                             <div class="form-group">
-                                <label class="sr-only" for="select">Email address</label>
-                                <select class="form-control" id="select">
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
+                                <label class="sr-only" for="tbkauth">全部授权账号</label>
+                                <select class="form-control" id="tbkauth" name="authorize_id">
+                                    <option value="">全部授权账号</option>
+                                    @foreach($tbkAuthorizes as $tbkAuth)
+                                        <option value="{{ $tbkAuth->id }}"
+                                                @if($tbkAuth->id == request('authorize_id')) selected @endif>{{ $tbkAuth->tb_user_nick }}</option>
+                                    @endforeach
                                 </select>
                             </div>
                         </div>
                         <div class="col-md-2">
                             <div class="btn-group">
                                 <button type="submit" class="btn btn-primary">提交</button>
-                                <button type="submit" class="btn btn-default">返回</button>
+                                <a class="btn btn-secondary" href="{{ url()->current() }}">返回</a>
                             </div>
                         </div>
                     </div>
@@ -80,6 +83,9 @@
                         </tbody>
                     </table>
                 </div>
+            </div>
+            <div class="col-md-12">
+                {{ $tbkOrders->links() }}
             </div>
         </div>
     </div>
