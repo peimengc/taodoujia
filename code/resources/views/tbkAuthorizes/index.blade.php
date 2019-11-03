@@ -20,7 +20,6 @@
                             <th>#</th>
                             <th>昵称/ID</th>
                             <th>到期时间</th>
-                            <th>操作</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -32,9 +31,6 @@
                                     <div class="font08 c-dgray">{{ $authorize->tb_user_id }}</div>
                                 </td>
                                 <td>{{ $authorize->expire_time }}</td>
-                                <td>
-
-                                </td>
                             </tr>
                         @endforeach
                         </tbody>
