@@ -60,9 +60,11 @@
                                              alt="商品图片">
                                         <div class="ml-1 d-inline-block align-middle">
                                             <div>
-                                                <a class="font10"
-                                                   href="{{ $order->item_link }}">{{ $order->item_title }}</a>
-                                                <div class="font08 c-dgray">付款时间：{{ $order->tk_paid_time }}</div>
+                                                <a href="{{ $order->item_link }}">{{ $order->item_title }}</a>
+                                                <div class="font08 c-dgray">
+                                                    <span>商品编号：{{ $order->item_id }}</span>
+                                                    <span>付款时间：{{ $order->tk_paid_time }}</span>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
