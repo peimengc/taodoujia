@@ -22,6 +22,9 @@ class TbkOrderController extends Controller
             ->when($request->query('authorize_id'), function (Builder $builder, $authorize_id) {
                 $builder->where('authorize_id', $authorize_id);
             })
+            ->when($request->query('tk_status'), function (Builder $builder, $tk_status) {
+                $builder->where('tk_status', $tk_status);
+            })
             ->paginate()->appends($request->all());
 
         $tbkAuthorizes = TbkAuthorize::query()->get(['id', 'tb_user_nick']);

@@ -68,6 +68,11 @@ class TbkOrder extends Model
         self::ORDER_SUC_STATUS => '订单成功',
     ];
 
+    public function getTkStatusCnAttribute()
+    {
+        return Arr::get($this->tkStatusArr, $this->tk_status);
+    }
+
     public static function saveByApi(array $data, $token)
     {
         if (empty($data)) {
