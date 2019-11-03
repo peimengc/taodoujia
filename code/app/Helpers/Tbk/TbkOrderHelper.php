@@ -69,13 +69,13 @@ class TbkOrderHelper
         return [];
     }
 
-    public function getNewOrder($token)
+    public function getNewOrder($token, $params = [])
     {
         //初始化时间
-        $params = [
+        $params = array_merge([
             'end_time' => date('Y-m-d H:i:s'),
             'start_time' => date('Y-m-d H:i:s', time() - $this->time),
-        ];
+        ], $params);
 
         $data = [];
 
@@ -92,7 +92,26 @@ class TbkOrderHelper
         } while (Arr::get($resp, 'has_next'));
 
         //写入数据库
-        TbkOrder::saveByApi($data,$token);
+        TbkOrder::saveByApi($data, $token);
+    }
+
+    //获取历史订单
+    public function getHistoryOrder($token, $star_date, $end_date = null)
+    {
+        //时间改为时间戳
+        $star_timestamp = strtotime($star_date);
+        $end_timestamp = $end_date ? strtotime($end_date) : time();
+        //时间差
+        $time = in_array(date('m'), ['06', '11', '12']) ? 1200 : 10800;
+        //缩小时间差
+        $dectime = $time - 10;
+        //循环调用
+        for ($i = $end_timestamp; $i >= $star_timestamp; $i -= $dectime) {
+            $this->getNewOrder($token, [
+                'end_time' => date('Y-m-d H:i:s', $i),
+                'start_time' => date('Y-m-d H:i:s', $i - $time),
+            ]);
+        }
     }
 
 }

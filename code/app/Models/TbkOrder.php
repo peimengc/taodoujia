@@ -74,7 +74,7 @@ class TbkOrder extends Model
             return;
         }
         //获取授权id,关联
-        $tbkAuthorizeId = TbkAuthorize::query()->where('access_token',$token)->value('id');
+        $tbkAuthorizeId = TbkAuthorize::query()->where('access_token', $token)->value('id');
         //集合
         $colData = collect($data);
         //获取所有tradeId
@@ -84,6 +84,10 @@ class TbkOrder extends Model
         //集合过滤掉已存在的
         $colData = $colData->filter(function ($item) use ($existTradeIdArr) {
             return !in_array(Arr::get($item, 'tarde_id'), $existTradeIdArr);
+        })->map(function ($item) use ($tbkAuthorizeId) {
+            $data = Arr::only($item, (new static)->getFillable());
+            $data['authorize_id'] = $tbkAuthorizeId;
+            return $data;
         })->all();
         //批量写入
         static::query()->insert($colData);

@@ -22,10 +22,11 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/home2', 'HomeController@index2')->name('home2');
 
 Route::get('/test',function () {
+    set_time_limit(3600);
     $orderHelper = new \App\Helpers\Tbk\TbkOrderHelper();
     $tbkAuth = \App\Models\TbkAuthorize::query()->first();
     if ($tbkAuth){
-       $orderHelper->getNewOrder($tbkAuth->access_token);
+       $orderHelper->getHistoryOrder($tbkAuth->access_token,'2019-11-01');
     }
 });
 
