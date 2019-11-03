@@ -50,7 +50,6 @@
                             <th>状态</th>
                             <th>价格</th>
                             <th>预估 / 结算</th>
-                            <th>操作</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -63,7 +62,7 @@
                                              alt="商品图片">
                                         <div class="ml-1 d-inline-block align-middle">
                                             <div>
-                                                <a href="{{ $order->item_link }}">{{ $order->item_title }}</a>
+                                                <a target="_blank" href="{{ $order->item_link }}">{{ $order->item_title }}</a>
                                                 <div class="font08 c-dgray">
                                                     <span>商品编号：{{ $order->item_id }}</span>
                                                     <span>付款时间：{{ $order->tk_paid_time }}</span>
@@ -75,16 +74,13 @@
                                 <td>{{ $order->tk_status }}</td>
                                 <td>{{ $order->item_price }} / {{ $order->alipay_total_price }}</td>
                                 <td>{{ $order->pub_share_pre_fee }} / {{ $order->total_commission_fee }}</td>
-                                <td>
-
-                                </td>
                             </tr>
                         @endforeach
                         </tbody>
                     </table>
                 </div>
             </div>
-            <div class="col-md-12">
+            <div>
                 {{ $tbkOrders->links() }}
             </div>
         </div>
