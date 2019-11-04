@@ -40,6 +40,13 @@ class DouTopTask extends Model
         return Arr::get($this->stateArr, $this->state);
     }
 
+    public function douaccount()
+    {
+        return $this->belongsTo(DouAccount::class, 'aweme_author_id', 'user_id')->withDefault([
+            'nick' => '暂未录入'
+        ]);
+    }
+
     public static function saveByApi($data)
     {
         if (empty($data)) {
@@ -68,7 +75,7 @@ class DouTopTask extends Model
                 'aweme_author_id' => Arr::get($item, 'item_author_id'),
                 'create_time' => Arr::get($item, 'create_time'),
                 'budget' => Arr::get($item, 'budget_int') / 1000,
-            ],$atArr);
+            ], $atArr);
         })->all();
         //批量写入
         static::query()->insert($attributes);

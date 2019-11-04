@@ -54,7 +54,7 @@
                         @foreach($douTopTasks as $task)
                             <tr>
                                 <td>{{ $task->id }}</td>
-                                <td>{{ $task->aweme_author_id }}</td>
+                                @include('douAccounts._td',['account'=>$task->douaccount])
                                 <td>{{ $task->state_cn }}</td>
                                 <td>{{ $task->budget }}</td>
                                 <td>{{ $task->cost }}</td>

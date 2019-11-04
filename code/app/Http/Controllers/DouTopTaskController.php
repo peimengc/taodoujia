@@ -11,6 +11,7 @@ class DouTopTaskController extends Controller
     public function index(Request $request)
     {
         $douTopTasks = DouTopTask::query()
+            ->with(['douaccount'])
             ->when($request->query('state'), function (Builder $builder, $state) {
                 $builder->where('state', $state);
             })
