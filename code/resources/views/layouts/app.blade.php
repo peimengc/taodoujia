@@ -87,7 +87,19 @@
                             </div>
                         </li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link" href="{{ route('home2') }}">DOU+统计</a>
+                            <a id="douTopDropdown" class="nav-link dropdown-toggle" href="#" role="button"
+                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                DOU+统计 <span class="caret"></span>
+                            </a>
+
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="douTopDropdown">
+                                <a class="dropdown-item" href="{{ route('tbkAuthorizes.index') }}">
+                                    投放账号
+                                </a>
+                                <a class="dropdown-item" href="{{ route('douTopTasks.index') }}">
+                                    投放任务
+                                </a>
+                            </div>
                         </li>
                     @endauth
                 </ul>
