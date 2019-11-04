@@ -83,18 +83,18 @@ class TbkOrder extends Model
         //集合
         $colData = collect($data);
         //获取所有tradeId
-        $allTradeIdArr = $colData->pluck('tarde_id')->all();
+        $allTradeIdArr = $colData->pluck('trade_id')->all();
         //查询已存在的
         $existTradeIdArr = static::query()->whereIn('trade_id', $allTradeIdArr)->pluck('trade_id')->all();
         //集合过滤掉已存在的
-        $colData = $colData->filter(function ($item) use ($existTradeIdArr) {
-            return !in_array(Arr::get($item, 'tarde_id'), $existTradeIdArr);
+        $attributes = $colData->filter(function ($item) use ($existTradeIdArr) {
+            return !in_array(Arr::get($item, 'trade_id'), $existTradeIdArr);
         })->map(function ($item) use ($tbkAuthorizeId) {
             $data = Arr::only($item, (new static)->getFillable());
             $data['authorize_id'] = $tbkAuthorizeId;
             return $data;
         })->all();
         //批量写入
-        static::query()->insert($colData);
+        static::query()->insert($attributes);
     }
 }

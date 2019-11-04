@@ -35,6 +35,8 @@ Route::group([
 ], function () {
     Route::get('/tbkOrders', 'TbkOrderController@index')->name('tbkOrders.index');
 
+    Route::get('/douTopTasks', 'DouTopTaskController@index')->name('douTopTasks.index');
+
     Route::get('/tbkAuthorizes', 'TbkAuthorizeController@index')->name('tbkAuthorizes.index');
     Route::get('/tbkAuthorizes/create', 'TbkAuthorizeController@create')->name('tbkAuthorizes.create');
     Route::post('/tbkAuthorizes', 'TbkAuthorizeController@store')->name('tbkAuthorizes.store');
