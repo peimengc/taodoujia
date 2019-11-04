@@ -63,6 +63,7 @@
                         <tr>
                             <th>#</th>
                             <th>商品</th>
+                            <th>出单账号</th>
                             <th>状态</th>
                             <th>价格</th>
                             <th>预估 / 结算</th>
@@ -87,6 +88,7 @@
                                         </div>
                                     </div>
                                 </td>
+                                <td>{{ $order->douaccount->nick }}</td>
                                 <td>{{ $order->tk_status_cn }}</td>
                                 <td>{{ $order->item_price }} / {{ $order->alipay_total_price }}</td>
                                 <td>{{ $order->pub_share_pre_fee }} / {{ $order->total_commission_fee }}</td>

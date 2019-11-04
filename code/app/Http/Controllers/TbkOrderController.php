@@ -12,6 +12,7 @@ class TbkOrderController extends Controller
     public function index(Request $request)
     {
         $tbkOrders = TbkOrder::query()
+            ->with(['douaccount'])
             ->when($request->query('item_title'), function (Builder $builder, $item_title) {
                 if (is_numeric($item_title)) {
                     $builder->where('item_id', $item_title);
