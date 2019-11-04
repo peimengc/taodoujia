@@ -25,6 +25,7 @@ class TbkOrderController extends Controller
             ->when($request->query('tk_status'), function (Builder $builder, $tk_status) {
                 $builder->where('tk_status', $tk_status);
             })
+            ->orderBy('tk_paid_time','desc')
             ->paginate()->appends($request->all());
 
         $tbkAuthorizes = TbkAuthorize::query()->get(['id', 'tb_user_nick']);
