@@ -14,6 +14,7 @@ class DouTopTaskController extends Controller
             ->when($request->query('state'), function (Builder $builder, $state) {
                 $builder->where('state', $state);
             })
+            ->orderBy('create_time','desc')
             ->paginate()->appends($request->all());
 
         return view('douTopTasks.index', compact('douTopTasks'));

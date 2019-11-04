@@ -43,22 +43,22 @@
                         <thead>
                         <tr>
                             <th>#</th>
+                            <th>账号</th>
                             <th>状态</th>
                             <th>金额</th>
                             <th>消耗</th>
-                            <th>时常</th>
-                            <th>账号</th>
+                            <th>投放时间</th>
                         </tr>
                         </thead>
                         <tbody>
                         @foreach($douTopTasks as $task)
                             <tr>
                                 <td>{{ $task->id }}</td>
+                                <td>{{ $task->aweme_author_id }}</td>
                                 <td>{{ $task->state_cn }}</td>
                                 <td>{{ $task->budget }}</td>
                                 <td>{{ $task->cost }}</td>
-                                <td>{{ $task->duration }}</td>
-                                <td>{{ $task->aweme_author_id }}</td>
+                                <td>{{ $task->create_time }}</td>
                             </tr>
                         @endforeach
                         </tbody>

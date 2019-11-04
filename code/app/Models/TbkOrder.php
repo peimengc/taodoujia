@@ -78,6 +78,12 @@ class TbkOrder extends Model
         if (empty($data)) {
             return;
         }
+        $date = date('Y-m-d H:i:s');
+
+        $atArr = [
+            'created_at' => $date,
+            'updated_at' => $date,
+        ];
         //获取授权id,关联
         $tbkAuthorizeId = TbkAuthorize::query()->where('access_token', $token)->value('id');
         //集合
@@ -89,10 +95,10 @@ class TbkOrder extends Model
         //集合过滤掉已存在的
         $attributes = $colData->filter(function ($item) use ($existTradeIdArr) {
             return !in_array(Arr::get($item, 'trade_id'), $existTradeIdArr);
-        })->map(function ($item) use ($tbkAuthorizeId) {
+        })->map(function ($item) use ($tbkAuthorizeId, $atArr) {
             $data = Arr::only($item, (new static)->getFillable());
             $data['authorize_id'] = $tbkAuthorizeId;
-            return $data;
+            return array_merge($data, $atArr);
         })->all();
         //批量写入
         static::query()->insert($attributes);

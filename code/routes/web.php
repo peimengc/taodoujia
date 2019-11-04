@@ -21,13 +21,19 @@ Auth::routes(['register' => false]);
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/home2', 'HomeController@index2')->name('home2');
 
-Route::get('/test',function () {
+Route::get('/ordertest',function () {
     set_time_limit(3600);
     $orderHelper = new \App\Helpers\Tbk\TbkOrderHelper();
     $tbkAuth = \App\Models\TbkAuthorize::query()->first();
     if ($tbkAuth){
        $orderHelper->getHistoryOrder($tbkAuth->access_token,'2019-11-01');
     }
+});
+
+Route::get('/tasktest',function () {
+    set_time_limit(3600);
+    $taskHelper = new \App\Helpers\Dou\DouTopTaskGetHelper();
+    $taskHelper->getNewTask('2019-11-03');
 });
 
 Route::group([
