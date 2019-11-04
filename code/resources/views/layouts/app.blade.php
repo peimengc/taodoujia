@@ -93,8 +93,8 @@
                             </a>
 
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="douTopDropdown">
-                                <a class="dropdown-item" href="{{ route('tbkAuthorizes.index') }}">
-                                    投放账号
+                                <a class="dropdown-item" href="{{ route('douAccounts.index') }}">
+                                    带货账号
                                 </a>
                                 <a class="dropdown-item" href="{{ route('douTopTasks.index') }}">
                                     投放任务

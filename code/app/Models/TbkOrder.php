@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Arr;
 
@@ -103,4 +104,18 @@ class TbkOrder extends Model
         //批量写入
         static::query()->insert($attributes);
     }
+
+    public static function bindAccountByAdzoneId(DouAccount $douAccount)
+    {
+        return static::query()
+            ->where('adzone_id', $douAccount->adzone_id)
+            ->where(function (Builder $builder) {
+                $builder->whereNull('account_id')
+                    ->orWhere('account_id', '=', 0);
+            })
+            ->update([
+                'account_id' => $douAccount->id
+            ]);
+    }
+
 }
