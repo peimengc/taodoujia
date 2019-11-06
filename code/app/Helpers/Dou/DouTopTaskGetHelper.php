@@ -45,14 +45,19 @@ class DouTopTaskGetHelper
                 Log::warning('抖音投放任务列表获取失败', $resp);
                 return;
             }
+            $list = Arr::get($resp, 'ad_list', []);
             //分页数据合并
-            $data = array_merge($data, Arr::get($resp, 'ad_list', []));
+            $data = array_merge($data, $list);
             //获取最小时间
-            $minCreateTime = collect($resp)->min('create_time');
+            $minCreateTime = collect($list)->map(function($item){
+                return [
+                    'create_time' => strtotime(Arr::get($item,'create_time'))
+                ];
+            })->min('create_time');
             //下一页
             $page++;
 
-        } while (Arr::get($resp, 'has_more') && $minCreateTime && (strtotime($minCreateTime) > strtotime($endTime)));
+        } while (Arr::get($resp, 'has_more') && $minCreateTime && ($minCreateTime > strtotime($endTime)));
 
         //保存
         DouTopTask::saveByApi($data);

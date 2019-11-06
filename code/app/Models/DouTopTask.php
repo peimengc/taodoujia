@@ -105,6 +105,13 @@ class DouTopTask extends Model
             ->get('aweme_id');
     }
 
+    public static function getNewTaskCreateTime()
+    {
+        return static::query()
+            ->orderBy('create_time','desc')
+            ->value('create_time');
+    }
+
     public static function addProduct($aweme_id, $attribute)
     {
         $product_id = Arr::get(json_decode(Arr::get($attribute, 'promotion', '[]'), 1), '0.product_id', 0);

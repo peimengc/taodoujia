@@ -33,7 +33,8 @@ Route::get('/ordertest',function () {
 Route::get('/tasktest',function () {
     set_time_limit(3600);
     $taskHelper = new \App\Helpers\Dou\DouTopTaskGetHelper();
-    $taskHelper->getNewTask('2019-11-03');
+    $endTime = \App\Models\DouTopTask::getNewTaskCreateTime();
+    $taskHelper->getNewTask($endTime);
 });
 
 Route::get('costtest',function () {
