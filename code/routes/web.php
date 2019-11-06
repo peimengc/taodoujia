@@ -43,6 +43,13 @@ Route::get('costtest',function () {
     $helper->execute();
 });
 
+Route::get('producttest',function () {
+    set_time_limit(3600);
+    $tasks = \App\Models\DouTopTask::getAwemeIdsByProductIdIsNull();
+    $helper = new \App\Helpers\Dou\DouTopTaskProductIdGetHelper($tasks);
+    $helper->execute();
+});
+
 Route::group([
     'middleware' => 'auth'
 ], function () {

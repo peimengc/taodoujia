@@ -102,7 +102,7 @@ class DouTopTask extends Model
         return self::query()
             ->whereNull('product_id')
             ->groupBy('aweme_id')
-            ->pluck('aweme_id');
+            ->get('aweme_id');
     }
 
     public static function addProduct($aweme_id, $attribute)
