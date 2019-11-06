@@ -36,6 +36,13 @@ Route::get('/tasktest',function () {
     $taskHelper->getNewTask('2019-11-03');
 });
 
+Route::get('costtest',function () {
+    set_time_limit(3600);
+    $tasks = \App\Models\DouTopTask::getAllByCostIsNull();
+    $helper = new \App\Helpers\Dou\DouTopTaskInfoGetHelper($tasks);
+    $helper->execute();
+});
+
 Route::group([
     'middleware' => 'auth'
 ], function () {

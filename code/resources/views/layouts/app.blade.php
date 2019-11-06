@@ -89,7 +89,7 @@
                         <li class="nav-item dropdown">
                             <a id="douTopDropdown" class="nav-link dropdown-toggle" href="#" role="button"
                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                DOU+统计 <span class="caret"></span>
+                                抖音DOU+ <span class="caret"></span>
                             </a>
 
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="douTopDropdown">
@@ -98,6 +98,21 @@
                                 </a>
                                 <a class="dropdown-item" href="{{ route('douTopTasks.index') }}">
                                     投放任务
+                                </a>
+                            </div>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a id="douTopDropdown" class="nav-link dropdown-toggle" href="#" role="button"
+                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                淘豆荚统计 <span class="caret"></span>
+                            </a>
+
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="douTopDropdown">
+                                <a class="dropdown-item" href="{{ route('douAccounts.index') }}">
+                                    时段统计
+                                </a>
+                                <a class="dropdown-item" href="{{ route('douTopTasks.index') }}">
+                                    账号统计
                                 </a>
                             </div>
                         </li>

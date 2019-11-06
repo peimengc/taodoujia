@@ -80,4 +80,36 @@ class DouTopTask extends Model
         //批量写入
         static::query()->insert($attributes);
     }
+
+    public function addCost($attribute)
+    {
+        return $this->fill([
+            'cost' => Arr::get($attribute, 'ad_stat.cost'),
+            'state' => Arr::get($attribute, 'ad_info.state'),
+        ])->save();
+    }
+
+    public static function getAllByCostIsNull()
+    {
+        return self::query()
+            ->whereIn('state', [1, 2])
+            ->orWhereNull('cost')
+            ->get();
+    }
+
+    public static function getAwemeIdsByProductIdIsNull()
+    {
+        return self::query()
+            ->whereNull('product_id')
+            ->groupBy('aweme_id')
+            ->pluck('aweme_id');
+    }
+
+    public static function addProduct($aweme_id, $attribute)
+    {
+        $product_id = Arr::get(json_decode(Arr::get($attribute, 'promotion', '[]'), 1), '0.product_id', 0);
+
+        self::query()->where('aweme_id', $aweme_id)->update(compact('product_id'));
+    }
+
 }
