@@ -71,6 +71,9 @@
                 <!-- Left Side Of Navbar -->
                 <ul class="navbar-nav mr-auto">
                     @auth
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url('/home') }}">主页</a>
+                        </li>
                         <li class="nav-item dropdown">
                             <a id="taobaoDropdown" class="nav-link dropdown-toggle" href="#" role="button"
                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
