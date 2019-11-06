@@ -23,7 +23,7 @@ class DouAccount extends Model
             //根据推广位绑定账号
             if ($douAccount->adzone_id) {
                 session()->flash('alert', [
-                    'type' => 'warning',
+                    'type' => 'info',
                     'content' => '成功绑定' . TbkOrder::bindAccountByAdzoneId($douAccount) . '个订单'
                 ]);
             }
