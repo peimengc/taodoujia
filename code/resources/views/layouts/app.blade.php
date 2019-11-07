@@ -133,6 +133,18 @@
                         </li>
                     @else
                         <li class="nav-item dropdown">
+                            <a id="boxDropdown" class="nav-link dropdown-toggle" href="#" role="button"
+                               data-hover="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                工具箱 <span class="caret"></span>
+                            </a>
+
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="boxDropdown">
+                                <a class="dropdown-item" data-toggle="modal" data-target="#historyTbkOrder">
+                                    历史订单获取
+                                </a>
+                            </div>
+                        </li>
+                        <li class="nav-item dropdown">
                             <a id="userDropdown" class="nav-link dropdown-toggle" href="#" role="button"
                                data-hover="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                 {{ Auth::user()->name }} <span class="caret"></span>
@@ -163,6 +175,26 @@
 
         @yield('content')
     </main>
+</div>
+
+<div class="modal fade" id="historyTbkOrder" tabindex="-1" role="dialog" aria-labelledby="historyTbkOrderLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="historyTbkOrderLabel">淘宝联盟历史订单获取</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-primary">提交</button>
+            </div>
+        </div>
+    </div>
 </div>
 </body>
 </html>

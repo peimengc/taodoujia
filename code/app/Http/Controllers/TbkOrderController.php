@@ -33,4 +33,9 @@ class TbkOrderController extends Controller
 
         return view('tbkOrders.index', compact('tbkOrders', 'tbkAuthorizes'));
     }
+
+    public function getHistory(Request $request)
+    {
+        
+    }
 }

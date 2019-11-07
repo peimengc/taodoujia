@@ -25,6 +25,7 @@ Route::group([
     Route::get('/home', 'HomeController@index')->name('home');
 
     Route::get('/tbkOrders', 'TbkOrderController@index')->name('tbkOrders.index');
+    Route::get('/tbkOrders/history', 'TbkOrderController@getHistory')->name('tbkOrders.history');
 
     Route::get('/douTopTasks', 'DouTopTaskController@index')->name('douTopTasks.index');
 
