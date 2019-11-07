@@ -111,10 +111,10 @@
                             </a>
 
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="douTopDropdown">
-                                <a class="dropdown-item" href="{{ route('douAccounts.index') }}">
+                                <a class="dropdown-item" href="{{ route('taodoujia.hour') }}">
                                     时段统计
                                 </a>
-                                <a class="dropdown-item" href="{{ route('douTopTasks.index') }}">
+                                <a class="dropdown-item" href="{{ route('taodoujia.douAccount') }}">
                                     账号统计
                                 </a>
                             </div>

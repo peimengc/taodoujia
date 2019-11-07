@@ -33,4 +33,7 @@ Route::group([
     Route::post('/tbkAuthorizes', 'TbkAuthorizeController@store')->name('tbkAuthorizes.store');
 
     Route::resource('/douAccounts','DouAccountController');
+
+    Route::get('/taodoujia/hour','DouJiaTongJiController@hour')->name('taodoujia.hour');
+    Route::get('/taodoujia/douAccount','DouJiaTongJiController@douAccount')->name('taodoujia.douAccount');
 });
