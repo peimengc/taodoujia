@@ -45,7 +45,7 @@
             color: #333333;
             vertical-align: middle;
             word-break: keep-all;
-            white-space:nowrap;
+            white-space: nowrap;
         }
 
         .thum-box img {
@@ -54,6 +54,7 @@
             border-radius: 5px;
         }
     </style>
+    @stack('css')
 </head>
 <body>
 <div id="app">
@@ -92,7 +93,7 @@
                         </li>
                         <li class="nav-item dropdown">
                             <a id="douTopDropdown" class="nav-link dropdown-toggle" href="#" role="button"
-                               data-hover="dropdown"  aria-haspopup="true" aria-expanded="false" v-pre>
+                               data-hover="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                 抖音DOU+ <span class="caret"></span>
                             </a>
 
