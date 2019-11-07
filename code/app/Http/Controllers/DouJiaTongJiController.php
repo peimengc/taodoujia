@@ -56,7 +56,7 @@ class DouJiaTongJiController extends Controller
             )
             ->fromSub($taskInfoQuery,'doutask_tbkorder')
             ->groupBy('hour')
-            ->having('dou_task_cost', '>', 0)
+//            ->having('dou_task_cost', '>', 0)
             ->get();
 
         return view('douJiaTongJi.hour', compact('data'));
