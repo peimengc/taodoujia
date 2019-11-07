@@ -139,8 +139,11 @@
                             </a>
 
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="boxDropdown">
-                                <a class="dropdown-item" data-toggle="modal" data-target="#historyTbkOrder">
+                                {{--<a class="dropdown-item" data-toggle="modal" data-target="#historyTbkOrder">
                                     历史订单获取
+                                </a>--}}
+                                <a class="dropdown-item" href="{{ route('tbkOrders.history') }}" title="获取30天内的订单">
+                                    历史订单获取（30天）
                                 </a>
                             </div>
                         </li>

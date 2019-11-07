@@ -60,7 +60,7 @@ class TbkOrderHelper
             return $re;
         }
         //日志记录
-        Log::warning('淘宝联盟订单获取失败', $resp);
+        Log::warning('淘宝联盟订单获取失败', ['response' => $resp]);
         //更改数据库状态
         if (Arr::get($resp, 'code') === 27) {
             event(new TbkAuthorizeExpired($token));
