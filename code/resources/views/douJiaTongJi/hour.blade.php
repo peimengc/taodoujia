@@ -30,7 +30,7 @@
                                 <td>{{ $hour->tbk_order_fee }}</td>
                                 <td>{{ $hour->tbk_order_count }}</td>
                                 <td>{{ $hour->tbk_order_fee-$hour->dou_task_cost }}</td>
-                                <td>{{ $hour->tbk_order_fee/$hour->dou_task_cost }}</td>
+                                <td>{{ $hour->dou_task_cost > 0 ? $hour->tbk_order_fee/$hour->dou_task_cost : 0 }}</td>
                             </tr>
                         @endforeach
                         </tbody>

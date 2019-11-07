@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\DouTopTaskInfo;
 use App\Models\TbkOrder;
-use Illuminate\Database\Query\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -42,19 +41,19 @@ class DouJiaTongJiController extends Controller
                 DB::raw('0 as order_count'),
                 DB::raw('0 as order_fee')
             )
+            ->unionAll($orderQuery)
             ->whereDate('created_at', $this->request->get('date'))
-            ->groupBy('hour')
-            ->unionAll($orderQuery);
+            ->groupBy('hour');
 
         //投放跟订单union后再group
         $data = DB::query()
             ->select(
-               'hour',
+                'hour',
                 DB::raw('SUM(task_cost) as dou_task_cost'),
                 DB::raw('SUM(order_count) as tbk_order_count'),
                 DB::raw('SUM(order_fee) as tbk_order_fee')
             )
-            ->fromSub($taskInfoQuery,'doutask_tbkorder')
+            ->fromSub($taskInfoQuery, 'doutask_tbkorder')
             ->groupBy('hour')
 //            ->having('dou_task_cost', '>', 0)
             ->get();
