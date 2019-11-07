@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>PeiMeng的私人博客</title>
+        <title>私人博客</title>
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
@@ -81,11 +81,7 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    PeiMeng的私人博客
-                </div>
-
-                <div class="links">
-                    通过非法手段进入后台的大佬请速速离去！！！
+                    私人博客
                 </div>
             </div>
         </div>
