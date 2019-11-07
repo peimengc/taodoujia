@@ -105,7 +105,7 @@ class DouJiaTongJiController extends Controller
             ->leftJoinSub($taskInfoQuery, 'tasks', function ($join) {
                 $join->on('dou_accounts.user_id', '=', 'tasks.aweme_author_id');
             })
-//            ->where('task_cost', '>', 0)
+            ->where('task_cost', '>', 0)
             ->get();
 
         return view('douJiaTongJi.douAccount', compact('data'));
