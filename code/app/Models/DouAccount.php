@@ -39,4 +39,10 @@ class DouAccount extends Model
     {
         return $this->hasMany(DouTopTask::class, 'aweme_author_id', 'user_id');
     }
+
+    public function setAdzoneIdAttribute($value)
+    {
+        $valueArr                      = explode('_', $value);
+        $this->attributes['adzone_id'] = array_pop($valueArr);
+    }
 }
