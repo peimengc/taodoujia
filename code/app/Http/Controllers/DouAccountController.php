@@ -13,7 +13,7 @@ class DouAccountController extends Controller
         $douAccounts = DouAccount::query()
             ->paginate()->appends($request->all());
 
-        return view('douAccounts.index',compact('douAccounts'));
+        return view('douAccounts.index', compact('douAccounts'));
     }
 
     public function create(DouAccount $douAccount)
@@ -24,11 +24,13 @@ class DouAccountController extends Controller
     public function store(Request $request, DouAccount $douAccount)
     {
         $request->validate([
-            'url' => 'required',
-            'phone' => 'required|unique:dou_accounts'
+            'url'       => 'required',
+            'phone'     => 'required|unique:dou_accounts',
+            'adzone_id' => 'nullable|unique:dou_accounts,adzone_id',
         ], [], [
-            'url' => '主页链接',
-            'phone' => '手机号'
+            'url'   => '主页链接',
+            'phone' => '手机号',
+            'adzone_id' => '推广位',
         ]);
 
         $attribute = (new DouAccountAttrGetHelper($request->input('url')))->getAttribute();
@@ -46,9 +48,11 @@ class DouAccountController extends Controller
     public function update(Request $request, DouAccount $douAccount)
     {
         $request->validate([
-            'phone' => 'required|unique:dou_accounts,phone,' . $douAccount->id
+            'phone'     => 'required|unique:dou_accounts,phone,' . $douAccount->id,
+            'adzone_id' => 'nullable|unique:dou_accounts,adzone_id,' . $douAccount->id,
         ], [], [
-            'phone' => '手机号'
+            'phone'     => '手机号',
+            'adzone_id' => '推广位',
         ]);
 
         $douAccount->fill($request->only(['phone', 'adzone_id']))->save();

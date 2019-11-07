@@ -49,7 +49,7 @@
                                 <td>{{ $account->adzone_id }}</td>
                                 <td>{{ $account->phone }}</td>
                                 <td>
-
+                                    <a href="{{ route('douAccounts.edit',$account) }}">编辑</a>
                                 </td>
                             </tr>
                         @endforeach
