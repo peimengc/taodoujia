@@ -8,6 +8,12 @@ use App\Models\TbkAuthorize;
 
 class TbkAuthorizeService
 {
+
+    /**
+     * 获取所有
+     * @param array $columns
+     * @return \Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection
+     */
     public function getAll($columns = ['*'])
     {
         return TbkAuthorize::query()->get($columns);

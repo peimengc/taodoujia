@@ -24,7 +24,19 @@
                         </div>
                         <div class="col-md-2">
                             <div class="form-group">
-                                <label class="sr-only" for="tbkauth">全部授权账号</label>
+                                <label class="sr-only" for="tbkauth">全部抖音账号</label>
+                                <select class="form-control" id="tbkauth" name="account_id">
+                                    <option value="">全部抖音账号</option>
+                                    @foreach($douAccounts as $douAccount)
+                                        <option value="{{ $douAccount->id }}"
+                                                @if($douAccount->id == request('account_id')) selected @endif>{{ $douAccount->nick }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label class="sr-only" for="tbkauth">全部联盟授权账号</label>
                                 <select class="form-control" id="tbkauth" name="authorize_id">
                                     <option value="">全部授权账号</option>
                                     @foreach($tbkAuthorizes as $tbkAuth)

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Helpers\Tbk\TbkOrderHelper;
 use App\Models\TbkAuthorize;
 use App\Models\TbkOrder;
+use App\Services\DouAccountService;
 use App\Services\TbkAuthorizeService;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
@@ -25,6 +26,9 @@ class TbkOrderController extends Controller
             ->when($request->query('authorize_id'), function (Builder $builder, $authorize_id) {
                 $builder->where('authorize_id', $authorize_id);
             })
+            ->when($request->query('account_id'), function (Builder $builder, $account_id) {
+                $builder->where('account_id', $account_id);
+            })
             ->when($request->query('tk_status'), function (Builder $builder, $tk_status) {
                 $builder->where('tk_status', $tk_status);
             })
@@ -32,8 +36,9 @@ class TbkOrderController extends Controller
             ->paginate()->appends($request->all());
 
         $tbkAuthorizes = app(TbkAuthorizeService::class)->getAll(['id', 'tb_user_nick']);
+        $douAccounts = app(DouAccountService::class)->getAll(['id', 'nick']);
 
-        return view('tbkOrders.index', compact('tbkOrders', 'tbkAuthorizes'));
+        return view('tbkOrders.index', compact('tbkOrders', 'tbkAuthorizes','douAccounts'));
     }
 
     public function getHistory(Request $request)
