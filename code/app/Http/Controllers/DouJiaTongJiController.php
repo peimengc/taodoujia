@@ -32,7 +32,7 @@ class DouJiaTongJiController extends Controller
                 DB::raw('COUNT(id) as order_count'),
                 DB::raw('SUM(pub_share_pre_fee) as order_fee')
             )
-            ->whereDate('tk_create_time', $this->request->get('date'))
+            ->date($this->request->get('date'))
             ->where('tk_status', '!=', TbkOrder::ORDER_CLOSE_STATUS)
             ->groupBy('hour');
 
@@ -45,7 +45,7 @@ class DouJiaTongJiController extends Controller
                 DB::raw('0 as order_fee')
             )
             ->unionAll($orderQuery)
-            ->whereDate('created_at', $this->request->get('date'))
+            ->date($this->request->get('date'))
             ->groupBy('hour');
 
         //投放跟订单union后再group
@@ -73,7 +73,7 @@ class DouJiaTongJiController extends Controller
                 DB::raw('COUNT(id) as order_count'),
                 DB::raw('SUM(pub_share_pre_fee) as order_fee')
             )
-            ->whereDate('tk_create_time', $this->request->get('date'))
+            ->date($this->request->get('date'))
             ->where('tk_status', '!=', TbkOrder::ORDER_CLOSE_STATUS)
             ->whereNotNull('account_id')
             ->groupBy('account_id');
@@ -84,7 +84,7 @@ class DouJiaTongJiController extends Controller
                 DB::raw('SUM(dou_top_task_infos.cost) AS task_cost')
             )
             ->leftJoin('dou_top_tasks', 'dou_top_tasks.task_id', '=', 'dou_top_task_infos.task_id')
-            ->whereDate('dou_top_task_infos.created_at', $this->request->get('date'))
+            ->date($this->request->get('date'))
             ->groupBy('aweme_author_id');
 
         //消耗按账号分组统计并关联订单统计

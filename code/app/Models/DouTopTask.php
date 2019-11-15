@@ -2,11 +2,14 @@
 
 namespace App\Models;
 
+use App\Models\Traits\DateScope;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Arr;
 
 class DouTopTask extends Model
 {
+    use DateScope;
+
     protected $fillable = [
         'task_id',
         'state',
@@ -45,6 +48,11 @@ class DouTopTask extends Model
         return $this->belongsTo(DouAccount::class, 'aweme_author_id', 'user_id')->withDefault([
             'nick' => '暂未录入'
         ]);
+    }
+
+    protected function getDateField()
+    {
+        return 'create_time';
     }
 
     public static function saveByApi($data)

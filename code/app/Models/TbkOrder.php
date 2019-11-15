@@ -2,11 +2,14 @@
 
 namespace App\Models;
 
+use App\Models\Traits\DateScope;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Arr;
 
 class TbkOrder extends Model
 {
+    use DateScope;
+
     protected $fillable = [
         'account_id',
         'authorize_id',
@@ -78,4 +81,9 @@ class TbkOrder extends Model
         return Arr::get($this->tkStatusArr, $this->tk_status);
     }
 
+
+    protected function getDateField()
+    {
+        return 'tk_create_time';
+    }
 }

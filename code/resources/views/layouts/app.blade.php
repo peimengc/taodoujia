@@ -56,7 +56,7 @@
     </style>
     @stack('css')
 </head>
-<body>
+<body style="background-color: #efefef !important">
 <div id="app">
     <nav class="navbar sticky-top navbar-expand-md navbar-light bg-white shadow-sm">
         <div class="container">
