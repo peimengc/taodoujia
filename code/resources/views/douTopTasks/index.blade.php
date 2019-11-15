@@ -28,6 +28,18 @@
                             </div>
                         </div>
                         <div class="col-md-2">
+                            <div class="form-group">
+                                <label class="sr-only" for="tbkauth">全部抖音账号</label>
+                                <select class="form-control" id="tbkauth" name="account_id">
+                                    <option value="">全部抖音账号</option>
+                                    @foreach($douAccounts as $douAccount)
+                                        <option value="{{ $douAccount->user_id }}"
+                                                @if($douAccount->user_id == request('account_id')) selected @endif>{{ $douAccount->nick }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
                             <div class="btn-group">
                                 <button type="submit" class="btn btn-primary">提交</button>
                                 <a class="btn btn-secondary" href="{{ url()->current() }}">返回</a>
