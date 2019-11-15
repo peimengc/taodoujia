@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Helpers\Tbk\TbkOrderHelper;
 use App\Models\TbkAuthorize;
 use App\Models\TbkOrder;
+use App\Services\TbkAuthorizeService;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 
@@ -30,7 +31,7 @@ class TbkOrderController extends Controller
             ->orderBy('tk_paid_time', 'desc')
             ->paginate()->appends($request->all());
 
-        $tbkAuthorizes = TbkAuthorize::query()->get(['id', 'tb_user_nick']);
+        $tbkAuthorizes = app(TbkAuthorizeService::class)->getAll(['id', 'tb_user_nick']);
 
         return view('tbkOrders.index', compact('tbkOrders', 'tbkAuthorizes'));
     }
@@ -39,14 +40,14 @@ class TbkOrderController extends Controller
     {
         dispatch(function () {
             $orderHelper = new TbkOrderHelper();
-            $tbkAuth = TbkAuthorize::query()->first();
+            $tbkAuth     = TbkAuthorize::query()->first();
             if ($tbkAuth) {
                 $orderHelper->getHistoryOrder($tbkAuth->access_token, now()->addDays(-30)->toDateString());
             }
         });
         return back()->with([
             'alert' => [
-                'type' => 'info',
+                'type'    => 'info',
                 'content' => '正在获取30天到现在的数据,大概需要10分钟左右'
             ]
         ]);

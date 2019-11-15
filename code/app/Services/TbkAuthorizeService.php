@@ -8,6 +8,11 @@ use App\Models\TbkAuthorize;
 
 class TbkAuthorizeService
 {
+    public function getAll($columns = ['*'])
+    {
+        return TbkAuthorize::query()->get($columns);
+    }
+
     /**
      * 获取id
      * @param $token
