@@ -18,7 +18,7 @@
             @foreach($homeMinBoxData as $data)
             <div class="col-md-3 min-box">
                 <div>
-                    <h1>{{ $data['value'] }}</h1>
+                    <h2>{{ $data['value'] }}</h2>
                     <span class="c-dgray font10">{{ $data['name'] }}</span>
                 </div>
             </div>
