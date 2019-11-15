@@ -17,7 +17,9 @@ Route::get('/', function () {
 });
 
 Auth::routes(['register' => false]);
-
+Route::get('test',function () {
+    \App\Services\DouAccountService::getAllAdzoneIdKeyIsId();
+});
 Route::group([
     'middleware' => 'auth'
 ], function () {

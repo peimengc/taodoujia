@@ -4,6 +4,7 @@ namespace App\Listeners;
 
 use App\Events\TbkAuthorizeExpired;
 use App\Models\TbkAuthorize;
+use App\Services\TbkAuthorizeService;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
@@ -27,10 +28,7 @@ class UpdateTbkAuthorizeActive
      */
     public function handle(TbkAuthorizeExpired $event)
     {
-        TbkAuthorize::query()
-            ->where('access_token', $event->token)
-            ->update([
-                'active' => false
-            ]);
+        //access_token失效
+        app(TbkAuthorizeService::class)->accessTokenExpiredByToken($event->token);
     }
 }

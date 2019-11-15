@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Services\TbkOrderService;
 use Illuminate\Database\Eloquent\Model;
 
 class DouAccount extends Model
@@ -23,8 +24,8 @@ class DouAccount extends Model
             //根据推广位绑定账号
             if ($douAccount->adzone_id) {
                 session()->flash('alert', [
-                    'type' => 'info',
-                    'content' => '成功绑定' . TbkOrder::bindAccountByAdzoneId($douAccount) . '个订单'
+                    'type'    => 'info',
+                    'content' => '成功绑定' . app(TbkOrderService::class)->bindAccountByAdzoneId($douAccount) . '个订单'
                 ]);
             }
         });

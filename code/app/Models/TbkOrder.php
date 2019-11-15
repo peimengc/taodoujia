@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Arr;
 
@@ -63,10 +62,10 @@ class TbkOrder extends Model
 
     //订单状态
     public $tkStatusArr = [
-        self::ORDER_OVER_STATUS => '订单结算',
-        self::ORDER_PAY_STATUS => '订单付款',
+        self::ORDER_OVER_STATUS  => '订单结算',
+        self::ORDER_PAY_STATUS   => '订单付款',
         self::ORDER_CLOSE_STATUS => '订单失效',
-        self::ORDER_SUC_STATUS => '订单成功',
+        self::ORDER_SUC_STATUS   => '订单成功',
     ];
 
     public function douaccount()
@@ -77,50 +76,6 @@ class TbkOrder extends Model
     public function getTkStatusCnAttribute()
     {
         return Arr::get($this->tkStatusArr, $this->tk_status);
-    }
-
-    public static function saveByApi(array $data, $token)
-    {
-        if (empty($data)) {
-            return;
-        }
-        $date = date('Y-m-d H:i:s');
-
-        $atArr = [
-            'created_at' => $date,
-            'updated_at' => $date,
-        ];
-        //获取授权id,关联
-        $tbkAuthorizeId = TbkAuthorize::query()->where('access_token', $token)->value('id');
-        //集合
-        $colData = collect($data);
-        //获取所有tradeId
-        $allTradeIdArr = $colData->pluck('trade_id')->all();
-        //查询已存在的
-        $existTradeIdArr = static::query()->whereIn('trade_id', $allTradeIdArr)->pluck('trade_id')->all();
-        //集合过滤掉已存在的
-        $attributes = $colData->filter(function ($item) use ($existTradeIdArr) {
-            return !in_array(Arr::get($item, 'trade_id'), $existTradeIdArr);
-        })->map(function ($item) use ($tbkAuthorizeId, $atArr) {
-            $data = Arr::only($item, (new static)->getFillable());
-            $data['authorize_id'] = $tbkAuthorizeId;
-            return array_merge($data, $atArr);
-        })->all();
-        //批量写入
-        static::query()->insert($attributes);
-    }
-
-    public static function bindAccountByAdzoneId(DouAccount $douAccount)
-    {
-        return static::query()
-            ->where('adzone_id', $douAccount->adzone_id)
-            ->where(function (Builder $builder) {
-                $builder->whereNull('account_id')
-                    ->orWhere('account_id', '=', 0);
-            })
-            ->update([
-                'account_id' => $douAccount->id
-            ]);
     }
 
 }

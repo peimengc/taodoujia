@@ -6,6 +6,7 @@ namespace App\Helpers\Tbk;
 
 use App\Events\TbkAuthorizeExpired;
 use App\Models\TbkOrder;
+use App\Services\TbkOrderService;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Log;
 
@@ -18,10 +19,10 @@ class TbkOrderHelper
     {
         require_once base_path('extends/taobaoke/TopSdk.php');
 
-        $topClient = new \TopClient(config('taobaoke.appkey'), config('taobaoke.secret'));
+        $topClient         = new \TopClient(config('taobaoke.appkey'), config('taobaoke.secret'));
         $topClient->format = 'json';
-        $this->topClient = $topClient;
-        $this->time = config('taobaoke.time');
+        $this->topClient   = $topClient;
+        $this->time        = config('taobaoke.time');
     }
 
     protected function orderDetailsGetRequest($token, array $params = [])
@@ -73,7 +74,7 @@ class TbkOrderHelper
     {
         //初始化时间
         $params = array_merge([
-            'end_time' => date('Y-m-d H:i:s'),
+            'end_time'   => date('Y-m-d H:i:s'),
             'start_time' => date('Y-m-d H:i:s', time() - $this->time),
         ], $params);
 
@@ -86,13 +87,13 @@ class TbkOrderHelper
             $data = array_merge($data, Arr::get($resp, 'results.publisher_order_dto', []));
 
             //分页数据
-            $params['page_no'] = Arr::get($resp, 'page_no') + 1;
+            $params['page_no']        = Arr::get($resp, 'page_no') + 1;
             $params['position_index'] = Arr::get($resp, 'position_index');
 
         } while (Arr::get($resp, 'has_next'));
 
         //写入数据库
-        TbkOrder::saveByApi($data, $token);
+        app(TbkOrderService::class)->saveByApi($data, $token);
     }
 
     //获取历史订单
@@ -100,7 +101,7 @@ class TbkOrderHelper
     {
         //时间改为时间戳
         $star_timestamp = strtotime($star_date);
-        $end_timestamp = $end_date ? strtotime($end_date) : time();
+        $end_timestamp  = $end_date ? strtotime($end_date) : time();
         //时间差
         $time = in_array(date('m'), ['06', '11', '12']) ? 1200 : 10800;
         //缩小时间差
@@ -108,7 +109,7 @@ class TbkOrderHelper
         //循环调用
         for ($i = $end_timestamp; $i >= $star_timestamp; $i -= $dectime) {
             $this->getNewOrder($token, [
-                'end_time' => date('Y-m-d H:i:s', $i),
+                'end_time'   => date('Y-m-d H:i:s', $i),
                 'start_time' => date('Y-m-d H:i:s', $i - $time),
             ]);
         }
