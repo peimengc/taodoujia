@@ -39,16 +39,39 @@ class TbkOrderService
         //查询已存在的
         $existTradeIdArr = TbkOrder::query()->whereIn('trade_id', $allTradeIdArr)->pluck('trade_id')->all();
         //集合过滤掉已存在的
-        $attributes = $colData->filter(function ($item) use ($existTradeIdArr) {
+        $doesntAttributes = $colData->filter(function ($item) use ($existTradeIdArr) {
             return !in_array(Arr::get($item, 'trade_id'), $existTradeIdArr);
-        })->map(function ($item) use ($tbkAuthorizeId, $atArr, $douAccountAdzoneIdArr) {
-            $data                 = Arr::only($item, app(TbkOrder::class)->getFillable());
+        });
+        //附加账号、授权关联和时间
+        $attributes = $doesntAttributes->map(function ($item) use ($tbkAuthorizeId, $atArr, $douAccountAdzoneIdArr) {
+            $data = Arr::only($item, app(TbkOrder::class)->getFillable());
             $data['authorize_id'] = $tbkAuthorizeId;
-            $data['account_id']   = Arr::get($douAccountAdzoneIdArr, $data['adzone_id']);
+            $data['account_id'] = Arr::get($douAccountAdzoneIdArr, $data['adzone_id']);
             return array_merge($data, $atArr);
         })->all();
         //批量写入
         TbkOrder::query()->insert($attributes);
+        //更新失效订单
+        TbkOrder::query()
+            ->whereIn('trade_id', $colData->where('tk_status', 13)->pluck('trade_id'))
+            ->update(['tk_status' => 13]);
+        //更新结算订单
+        TbkOrder::query()
+            ->whereIn('trade_id', $colData->where('tk_status', 3)->pluck('trade_id'))
+            ->update(['tk_status' => 3]);
+    }
+
+    /**
+     * 批量更新订单状态
+     * @param array $where
+     * @param int $tk_status
+     * @return int
+     */
+    public function updateTkStatus(array $where, $tk_status = 13)
+    {
+        return TbkOrder::query()
+            ->where(...$where)
+            ->update(compact('tk_status'));
     }
 
     /**

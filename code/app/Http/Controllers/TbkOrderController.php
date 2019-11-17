@@ -47,13 +47,13 @@ class TbkOrderController extends Controller
             $orderHelper = new TbkOrderHelper();
             $tbkAuth     = TbkAuthorize::query()->first();
             if ($tbkAuth) {
-                $orderHelper->getHistoryOrder($tbkAuth->access_token, now()->addDays(-30)->toDateString());
+                $orderHelper->getHistoryOrder($tbkAuth->access_token, now()->addDays(-15)->toDateString());
             }
         });
         return back()->with([
             'alert' => [
                 'type'    => 'info',
-                'content' => '正在获取30天到现在的数据,大概需要10分钟左右'
+                'content' => '正在获取15前天到现在的数据,大概需要10分钟左右'
             ]
         ]);
     }
