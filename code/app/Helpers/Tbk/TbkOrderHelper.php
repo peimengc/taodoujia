@@ -85,7 +85,7 @@ class TbkOrderHelper
             $resp   = $this->orderDetailsGetRequest($token, $params);
             $orders = Arr::get($resp, 'results.publisher_order_dto', []);
             if (empty($orders)) {
-                sleep(1);
+                usleep(100000);
             } else {
                 $data = array_merge($data, $orders);
             }
@@ -117,5 +117,4 @@ class TbkOrderHelper
             ]);
         }
     }
-
 }
