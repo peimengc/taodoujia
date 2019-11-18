@@ -82,10 +82,13 @@ class TbkOrderHelper
 
         do {
 
-            $resp = $this->orderDetailsGetRequest($token, $params);
-
-            $data = array_merge($data, Arr::get($resp, 'results.publisher_order_dto', []));
-
+            $resp   = $this->orderDetailsGetRequest($token, $params);
+            $orders = Arr::get($resp, 'results.publisher_order_dto', []);
+            if (empty($orders)) {
+                sleep(1);
+            } else {
+                $data = array_merge($data, $orders);
+            }
             //分页数据
             $params['page_no']        = Arr::get($resp, 'page_no') + 1;
             $params['position_index'] = Arr::get($resp, 'position_index');
