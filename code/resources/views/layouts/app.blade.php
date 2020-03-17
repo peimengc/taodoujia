@@ -53,10 +53,16 @@
             width: 3.5rem;
             border-radius: 5px;
         }
+
+        .flex-center {
+            align-items: center;
+            display: flex;
+            justify-content: center;
+        }
     </style>
     @stack('css')
 </head>
-<body style="background-color: #efefef !important">
+<body style="background-color: #FFF !important">
 <div id="app">
     <nav class="navbar sticky-top navbar-expand-md navbar-light bg-white shadow-sm">
         <div class="container">
@@ -172,15 +178,19 @@
         </div>
     </nav>
 
-    <main class="py-4">
+    <main class="py-4" style="min-height: 80vh">
 
         @include('components.alert')
 
         @yield('content')
     </main>
+    <div class="container flex-center">
+        <h5>网站备案号为:晋ICP备19012668号</h5>
+    </div>
 </div>
 
-<div class="modal fade" id="historyTbkOrder" tabindex="-1" role="dialog" aria-labelledby="historyTbkOrderLabel" aria-hidden="true">
+<div class="modal fade" id="historyTbkOrder" tabindex="-1" role="dialog" aria-labelledby="historyTbkOrderLabel"
+     aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
